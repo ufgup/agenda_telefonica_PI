@@ -2,11 +2,6 @@
  *  Definição de tipos estruturais de objetos do programa
  */
 
-#define CAR 40 // Definindo quantidade de caracteres de uma String
-#define MAX 100 // Para redimensionar a capacidade da fila, basta modificar essa constante para o valor desejado.
-
-typedef char String[CAR];
-
 typedef struct contato {
 	String nome;
 	String email;

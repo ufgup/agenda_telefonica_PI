@@ -1,6 +1,12 @@
 /*
  * Biblioteca responsável por guardar as funções básicas de sistema.
  */ 
+ 
+#define CAR 40 // Definindo quantidade de caracteres de uma String
+#define MAX 100 // Para redimensionar a capacidade da fila, basta modificar essa constante para o valor desejado.
+
+typedef char String[CAR];
+enum boolean {false = -1, true = 0}; // Enum boleano que retorna apenas os valores verdadeiro (0) e falso (1)
 
 /*
  * Essa função serve para limpar a tela.
@@ -20,6 +26,16 @@ void travatela(){
 	printf("Digite ENTER para continuar\n");
 	getchar();
 	
+}
+
+int comparar_string(String string1, String string2) {
+	int i;
+	
+	for(i=0 ; string1[i]==string2[i] ; i++) {
+		if(string1[i]== '\0') return true;
+	}
+	
+	return false;
 }
 
 /*
