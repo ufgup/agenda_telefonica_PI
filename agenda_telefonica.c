@@ -62,7 +62,7 @@ char apresentar_menu() {
 }
 
 /*
- * Função responsável por reordenar a agenda por ordem alfabética
+ * Função responsável por reordenar a agenda por ordem alfabética do nome
  */
 void ordenar_agenda_por_nome(T_agenda *agenda_telefonica) {
 	int i, j=0, c;
@@ -77,6 +77,90 @@ void ordenar_agenda_por_nome(T_agenda *agenda_telefonica) {
 		
 		for(i = 0; i < agenda_telefonica->tamanho-1; i++) {
 			c = comparar_string(agenda_telefonica->contatos[i].nome, agenda_telefonica->contatos[i+1].nome);
+			if(c > 0) {
+				contato_temp = agenda_telefonica->contatos[i];
+				agenda_telefonica->contatos[i] = agenda_telefonica->contatos[i+1];
+				agenda_telefonica->contatos[i+1] = contato_temp;
+			}
+		}
+		
+		j++;
+	}
+	
+}
+
+/*
+ * Função responsável por reordenar a agenda por ordem dos numerais do telefone
+ */
+void ordenar_agenda_por_telefone(T_agenda *agenda_telefonica) {
+	int i, j=0, c;
+	T_contato contato_temp;
+	
+	if(agenda_telefonica->tamanho == 0) {
+		// agenda vazia... não tenho o que fazer.
+		return;
+	}
+	
+	while(j < agenda_telefonica->tamanho) {
+		
+		for(i = 0; i < agenda_telefonica->tamanho-1; i++) {
+			c = comparar_string(agenda_telefonica->contatos[i].telefone, agenda_telefonica->contatos[i+1].telefone);
+			if(c > 0) {
+				contato_temp = agenda_telefonica->contatos[i];
+				agenda_telefonica->contatos[i] = agenda_telefonica->contatos[i+1];
+				agenda_telefonica->contatos[i+1] = contato_temp;
+			}
+		}
+		
+		j++;
+	}
+	
+}
+
+/*
+ * Função responsável por reordenar a agenda por ordem alfabetica dos emails
+ */
+void ordenar_agenda_por_email(T_agenda *agenda_telefonica) {
+	int i, j=0, c;
+	T_contato contato_temp;
+	
+	if(agenda_telefonica->tamanho == 0) {
+		// agenda vazia... não tenho o que fazer.
+		return;
+	}
+	
+	while(j < agenda_telefonica->tamanho) {
+		
+		for(i = 0; i < agenda_telefonica->tamanho-1; i++) {
+			c = comparar_string(agenda_telefonica->contatos[i].email, agenda_telefonica->contatos[i+1].email);
+			if(c > 0) {
+				contato_temp = agenda_telefonica->contatos[i];
+				agenda_telefonica->contatos[i] = agenda_telefonica->contatos[i+1];
+				agenda_telefonica->contatos[i+1] = contato_temp;
+			}
+		}
+		
+		j++;
+	}
+	
+}
+
+/*
+ * Função responsável por reordenar a agenda por ordem alfabetica dos emails
+ */
+void ordenar_agenda_por_data_nascimento(T_agenda *agenda_telefonica) {
+	int i, j=0, c;
+	T_contato contato_temp;
+	
+	if(agenda_telefonica->tamanho == 0) {
+		// agenda vazia... não tenho o que fazer.
+		return;
+	}
+	
+	while(j < agenda_telefonica->tamanho) {
+		
+		for(i = 0; i < agenda_telefonica->tamanho-1; i++) {
+			c = comparar_string(agenda_telefonica->contatos[i].data_nascimento, agenda_telefonica->contatos[i+1].data_nascimento);
 			if(c > 0) {
 				contato_temp = agenda_telefonica->contatos[i];
 				agenda_telefonica->contatos[i] = agenda_telefonica->contatos[i+1];
@@ -113,8 +197,6 @@ void cadastrar_novo_contato(T_agenda *agenda_telefonica) {
 	agenda_telefonica->ultimo++;
 	agenda_telefonica->tamanho++;
 	
-	ordenar_agenda_por_nome(agenda_telefonica);
-	
 	printf("Novo contato cadastrado\n");
 	travatela();
 }
@@ -137,6 +219,45 @@ void apresentar_contato(T_contato contato_agenda) {
  */
 void listar_contatos(T_agenda *agenda_telefonica) {
 	int i;
+	char op;
+	
+	printf("Informe a forma como você deseja que os contatos sejam ordenados na apresentação\n");
+	printf("N - por nome\n");
+	printf("T - por telefone\n");
+	printf("E - por email\n");
+	printf("D - por data de nascimento\n");
+	printf("Digite a opção desejada: ");
+	scanf("%c", &op);
+	getchar();
+	limpar_tela();
+	
+	switch(op) {
+		case('n'):
+		case('N'):
+			printf("Contatos ordenados por nome:\n\n");
+			ordenar_agenda_por_nome(agenda_telefonica);
+			break;
+		case('t'):
+		case('T'):
+			printf("Contatos ordenados por telefone:\n\n");
+			ordenar_agenda_por_telefone(agenda_telefonica);
+			break;
+		case('e'):
+		case('E'):
+			printf("Contatos ordenados por email:\n\n");
+			ordenar_agenda_por_email(agenda_telefonica);
+			break;
+			
+		case('d'):
+		case('D'):
+			printf("Contatos ordenados por data de nascimento:\n\n");
+			ordenar_agenda_por_data_nascimento(agenda_telefonica);
+			break;
+			
+		default:
+			printf("Opção desconhecida. Vou ordenar por nome\n");
+			ordenar_agenda_por_nome(agenda_telefonica);
+	}
 	
 	for(i = 0; i < agenda_telefonica->tamanho ; i++) {
 		apresentar_contato(agenda_telefonica->contatos[i]);
