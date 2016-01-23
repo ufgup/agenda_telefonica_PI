@@ -45,14 +45,15 @@ char apresentar_menu() {
 	printf("L – Para listar todos os contatos já cadastrados na agenda.\n");
 	printf("P – Procurar um contato na agenda pelo nome.\n");
 	printf("R – Remover um contato da agenda pelo nome.\n");
+	printf("E – Exibir todos os contatos que começam com uma letra.\n");
 	printf("S – Sair da agenda eletrônica.\n");
 	printf("----------------------------------------------------------------\n");
 	printf("Selecione a opção desejada: ");
 	scanf("%c", &opcao);
 	getchar(); //Limpar buffer do Teclado
 	
-	if(opcao != 'C' && opcao != 'L' && opcao != 'P' && opcao != 'R' && opcao != 'S' 
-			&& opcao != 'c' && opcao != 'l' && opcao != 'p' && opcao != 'r' && opcao != 's') {
+	if(opcao != 'C' && opcao != 'L' && opcao != 'P' && opcao != 'R' && opcao != 'S' && opcao != 'E'
+			&& opcao != 'c' && opcao != 'l' && opcao != 'p' && opcao != 'r' && opcao != 's' && opcao != 'e') {
 		limpar_tela();
 		printf("Opção inválida. Digite uma opção válida\n");
 		opcao = apresentar_menu(); 	
@@ -319,34 +320,37 @@ int main(int argc, char **argv) {
 	do {
 		limpar_tela();
 		opcao = apresentar_menu();
+		limpar_tela();
 		
 		switch(opcao) {
 			case('c'):
 			case('C'):
-				limpar_tela();
-				printf("Cadastrar novo contato\n\n");
+				printf("Cadastrar um contato na agenda.\n\n");
 				cadastrar_novo_contato(&agenda_telefonica);
 				break;
 				
 			case('l'):
 			case('L'):
-				limpar_tela();
-				printf("Lista de contatos\n\n");
+				printf("Listar todos os contatos já cadastrados na agenda.\n\n");
 				listar_contatos(&agenda_telefonica);
 				break;
 				
 			case('p'):
 			case('P'):
-				limpar_tela();
-				printf("Buscar um contato\n\n");
+				printf("Procurar um contato na agenda pelo nome.\n\n");
 				buscar_contato(&agenda_telefonica);
 				break;
 				
 			case('r'):
 			case('R'):
-				limpar_tela();
-				printf("Excluir um contato\n\n");
+				printf("Remover um contato da agenda pelo nome.\n\n");
 				excluir_contato(&agenda_telefonica);
+				break;
+				
+			case('e'):
+			case('E'):
+				printf("Exibir todos os contatos que começam com uma letra.\n\n");
+				
 				break;
 			
 			case('s'):
