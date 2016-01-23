@@ -5,6 +5,7 @@
 # Ignora tudo que não for .c
 *
 !*.c
+!*.h
 
 # Object files
 *.o

@@ -20,26 +20,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-/*
- * Essa função serve para limpar a tela.
- * 
- * Abstração para encapsular detalhes do Sistema Operacional.
- */
-void limpar_tela() {
-	system("clear"); // Linux
-	// system("cls"); //windows (descomente para usar)
-}
-/*
- * Essa função aparece para o usuário quando ele termina de fazer alguma ação no sistema. 
- * Ela solicita que o usuário digite enter para voltar para o fluxo principal
- * 
- */
-void travatela(){	
-	printf("Digite ENTER para continuar\n");
-	getchar();
-	
-}
+#include "sistema.h"
 
 /*
  * Apresenta o Menu de opções disponíveis no Sistema e trata opções inválidas
@@ -69,6 +50,9 @@ char apresentar_menu() {
 	return opcao;
 }
 
+/*
+ * Função principal do programa.
+ */
 int main(int argc, char **argv) {
 	
 	char opcao;
@@ -76,6 +60,14 @@ int main(int argc, char **argv) {
 	do {
 		limpar_tela();
 		opcao = apresentar_menu();
+		
+		switch(opcao) {
+			case('s'):
+			case('S'):
+				printf("Obrigado por usar nossa agenda! Até mais!\n\n");
+				break;
+		}
+		
 	} while(opcao != 'S' && opcao != 's');
 	
 	return 0;
