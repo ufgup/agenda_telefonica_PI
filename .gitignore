@@ -1,3 +1,11 @@
+# arquivos temporarios
+.*
+!.gitignore
+
+# Ignora tudo que não for .c
+*
+!*.c
+
 # Object files
 *.o
 *.ko
