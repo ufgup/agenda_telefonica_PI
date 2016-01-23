@@ -292,6 +292,31 @@ int buscar_contato(T_agenda *agenda_telefonica) {
 	return -1;
 }
 
+/*
+ * Busca todos os contatos cujo nome comece com a letra informada no parâmetro
+ */
+void buscar_contatos_por_letra(T_agenda *agenda_telefonica) {
+	char letra;
+	int i;
+	
+	printf("Digite a letra inicial do nome dos contatos que você deseja buscar: ");
+	scanf("%c", &letra);
+	getchar();
+	
+	ordenar_agenda_por_nome(agenda_telefonica);
+	
+	for(i = 0; i < agenda_telefonica->tamanho ; i++) {
+		if(agenda_telefonica->contatos[i].nome[0] == letra) {
+			apresentar_contato(agenda_telefonica->contatos[i]);
+		}
+	}
+	
+	travatela();
+}
+
+/*
+ * Remove um contato da agenda pelo nome
+ */
 void excluir_contato(T_agenda *agenda_telefonica) {
 	int index, i;
 	
@@ -350,7 +375,7 @@ int main(int argc, char **argv) {
 			case('e'):
 			case('E'):
 				printf("Exibir todos os contatos que começam com uma letra.\n\n");
-				
+				buscar_contatos_por_letra(&agenda_telefonica);
 				break;
 			
 			case('s'):
