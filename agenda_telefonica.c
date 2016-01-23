@@ -114,7 +114,9 @@ void cadastrar_novo_contato(T_agenda *agenda_telefonica) {
 	printf("Novo contato cadastrado\n");
 	travatela();
 }
-
+/*
+ * Mostra todos os dados de um contato
+ */
 void apresentar_contato(T_contato contato_agenda) {
 		printf("Nome: %s", contato_agenda.nome);
 		printf("Email: %s", contato_agenda.email);
@@ -141,7 +143,7 @@ void listar_contatos(T_agenda *agenda_telefonica) {
 /*
  * Busca um contato na agenda de acordo com o nome passado por parâmetro
  */
-void buscar_contato(T_agenda *agenda_telefonica) {
+int buscar_contato(T_agenda *agenda_telefonica) {
 	int i = 0;
 	String nome;
 	
@@ -152,7 +154,7 @@ void buscar_contato(T_agenda *agenda_telefonica) {
 		if( comparar_string(agenda_telefonica->contatos[i].nome, nome) == true ) {
 			apresentar_contato(agenda_telefonica->contatos[i]);
 			travatela();
-			return;
+			return i;
 		}
 		i++;
 	}
@@ -160,6 +162,22 @@ void buscar_contato(T_agenda *agenda_telefonica) {
 	// Se chegar aqui é porque deu ruim;
 	printf("Nao identifiquei nenhum contato com o nome %s\n", nome);
 	travatela();
+	return -1;
+}
+
+void excluir_contato(T_agenda *agenda_telefonica) {
+	int index, i;
+	
+	index = buscar_contato(agenda_telefonica);
+	
+	if(index != -1) {
+		for(i = index; i < agenda_telefonica->tamanho; i++) {
+			agenda_telefonica->contatos[i] = agenda_telefonica->contatos[i+1];
+		}
+		
+		agenda_telefonica->ultimo--;
+		agenda_telefonica->tamanho--;
+	}
 }
 
 /*
@@ -196,6 +214,13 @@ int main(int argc, char **argv) {
 				limpar_tela();
 				printf("Buscar um contato\n\n");
 				buscar_contato(&agenda_telefonica);
+				break;
+				
+			case('r'):
+			case('R'):
+				limpar_tela();
+				printf("Excluir um contato\n\n");
+				excluir_contato(&agenda_telefonica);
 				break;
 			
 			case('s'):
