@@ -24,6 +24,16 @@
 #include "struct.h"
 
 /*
+ * Inicia a agenda telefonica com o padrao
+ */
+void inicia_agenda(T_agenda *agenda_telefonica) {
+	agenda_telefonica->primeiro = 0;
+	agenda_telefonica->ultimo = 0;
+	agenda_telefonica->tamanho = 0;
+}
+
+
+/*
  * Apresenta o Menu de opções disponíveis no Sistema e trata opções inválidas
  */
 char apresentar_menu() {
@@ -52,17 +62,51 @@ char apresentar_menu() {
 }
 
 /*
+ * Cadastra um novo contato na agenda;
+ */
+void cadastrar_novo_contato(T_agenda *agenda_telefonica) {
+	T_contato novo_contato;
+	
+	printf("Digite o nome do contato: ");
+	fgets(novo_contato.nome, CAR, stdin);
+	
+	printf("Digite o email do contato: ");
+	fgets(novo_contato.email, CAR, stdin);
+	
+	printf("Digite o telefone do contato: ");
+	scanf("%s", novo_contato.telefone);
+	getchar();
+	
+	agenda_telefonica->contatos[agenda_telefonica->ultimo] = novo_contato;
+	agenda_telefonica->ultimo++;
+	agenda_telefonica->tamanho++;
+	
+	printf("Novo contato cadastrado\n");
+	travatela();
+}
+
+/*
  * Função principal do programa.
  */
 int main(int argc, char **argv) {
 	
 	char opcao;
+	T_agenda agenda_telefonica;
+	
+	inicia_agenda(&agenda_telefonica);
 	
 	do {
 		limpar_tela();
 		opcao = apresentar_menu();
 		
 		switch(opcao) {
+			case('c'):
+			case('C'):
+				limpar_tela();
+				printf("Cadastrar novo contato\n\n");
+				cadastrar_novo_contato(&agenda_telefonica);
+				break;
+			
 			case('s'):
 			case('S'):
 				printf("Obrigado por usar nossa agenda! Até mais!\n\n");

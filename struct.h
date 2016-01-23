@@ -15,6 +15,9 @@ typedef struct contato {
 
 typedef struct agenda {
 	T_contato contatos[MAX];
+	int primeiro;
+	int ultimo;
+	int tamanho;
 }T_agenda;
 
 /*
