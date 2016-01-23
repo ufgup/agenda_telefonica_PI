@@ -86,6 +86,25 @@ void cadastrar_novo_contato(T_agenda *agenda_telefonica) {
 }
 
 /*
+ * Listagem de contatos da agenda.
+ * 
+ * A lista está ordenada pela ordem que os contatos foram cadastrados.
+ * Ordenação deve ser feita no momento do cadastro.
+ */
+void listar_contatos(T_agenda *agenda_telefonica) {
+	int i;
+	
+	for(i = 0; i < agenda_telefonica->tamanho ; i++) {
+		printf("Nome: %s", agenda_telefonica->contatos[i].nome);
+		printf("Email: %s", agenda_telefonica->contatos[i].email);
+		printf("Telefone: %s\n", agenda_telefonica->contatos[i].telefone);
+		printf("===========================================================\n");
+	}
+	
+	travatela();
+}
+
+/*
  * Função principal do programa.
  */
 int main(int argc, char **argv) {
@@ -105,6 +124,13 @@ int main(int argc, char **argv) {
 				limpar_tela();
 				printf("Cadastrar novo contato\n\n");
 				cadastrar_novo_contato(&agenda_telefonica);
+				break;
+				
+			case('l'):
+			case('L'):
+				limpar_tela();
+				printf("Lista de contatos\n\n");
+				listar_contatos(&agenda_telefonica);
 				break;
 			
 			case('s'):
