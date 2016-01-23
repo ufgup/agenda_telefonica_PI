@@ -105,6 +105,10 @@ void cadastrar_novo_contato(T_agenda *agenda_telefonica) {
 	scanf("%s", novo_contato.telefone);
 	getchar();
 	
+	printf("Digite a data de nascimento (formato: aaaa-mm-dd): ");
+	scanf("%s", novo_contato.data_nascimento);
+	getchar();
+	
 	agenda_telefonica->contatos[agenda_telefonica->ultimo] = novo_contato;
 	agenda_telefonica->ultimo++;
 	agenda_telefonica->tamanho++;
@@ -121,6 +125,7 @@ void apresentar_contato(T_contato contato_agenda) {
 		printf("Nome: %s", contato_agenda.nome);
 		printf("Email: %s", contato_agenda.email);
 		printf("Telefone: %s\n", contato_agenda.telefone);
+		printf("Data Nascimento: %s\n", contato_agenda.data_nascimento);
 		printf("===========================================================\n");
 } 
 

@@ -6,6 +6,7 @@ typedef struct contato {
 	String nome;
 	String email;
 	char telefone[11];
+	char data_nascimento[10]; // Formato aaaa-mm-dd
 }T_contato;
 
 typedef struct agenda {
