@@ -62,6 +62,34 @@ char apresentar_menu() {
 }
 
 /*
+ * Função responsável por reordenar a agenda por ordem alfabética
+ */
+void ordenar_agenda_por_nome(T_agenda *agenda_telefonica) {
+	int i, j=0, c;
+	T_contato contato_temp;
+	
+	if(agenda_telefonica->tamanho == 0) {
+		// agenda vazia... não tenho o que fazer.
+		return;
+	}
+	
+	while(j < agenda_telefonica->tamanho) {
+		
+		for(i = 0; i < agenda_telefonica->tamanho-1; i++) {
+			c = comparar_string(agenda_telefonica->contatos[i].nome, agenda_telefonica->contatos[i+1].nome);
+			if(c > 0) {
+				contato_temp = agenda_telefonica->contatos[i];
+				agenda_telefonica->contatos[i] = agenda_telefonica->contatos[i+1];
+				agenda_telefonica->contatos[i+1] = contato_temp;
+			}
+		}
+		
+		j++;
+	}
+	
+}
+
+/*
  * Cadastra um novo contato na agenda;
  */
 void cadastrar_novo_contato(T_agenda *agenda_telefonica) {
@@ -80,6 +108,8 @@ void cadastrar_novo_contato(T_agenda *agenda_telefonica) {
 	agenda_telefonica->contatos[agenda_telefonica->ultimo] = novo_contato;
 	agenda_telefonica->ultimo++;
 	agenda_telefonica->tamanho++;
+	
+	ordenar_agenda_por_nome(agenda_telefonica);
 	
 	printf("Novo contato cadastrado\n");
 	travatela();

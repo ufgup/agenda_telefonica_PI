@@ -35,7 +35,7 @@ int comparar_string(String string1, String string2) {
 		if(string1[i]== '\0') return true;
 	}
 	
-	return false;
+	return string1[i] - string2[i];
 }
 
 /*
