@@ -46,14 +46,15 @@ char apresentar_menu() {
 	printf("P – Procurar um contato na agenda pelo nome.\n");
 	printf("R – Remover um contato da agenda pelo nome.\n");
 	printf("E – Exibir todos os contatos que começam com uma letra.\n");
+	printf("I – Tela com informações sobre a agenda.\n");
 	printf("S – Sair da agenda eletrônica.\n");
 	printf("----------------------------------------------------------------\n");
 	printf("Selecione a opção desejada: ");
 	scanf("%c", &opcao);
 	getchar(); //Limpar buffer do Teclado
 	
-	if(opcao != 'C' && opcao != 'L' && opcao != 'P' && opcao != 'R' && opcao != 'S' && opcao != 'E'
-			&& opcao != 'c' && opcao != 'l' && opcao != 'p' && opcao != 'r' && opcao != 's' && opcao != 'e') {
+	if(opcao != 'C' && opcao != 'L' && opcao != 'P' && opcao != 'R' && opcao != 'S' && opcao != 'E' && opcao != 'I'
+			&& opcao != 'c' && opcao != 'l' && opcao != 'p' && opcao != 'r' && opcao != 's' && opcao != 'e' && opcao != 'i') {
 		limpar_tela();
 		printf("Opção inválida. Digite uma opção válida\n");
 		opcao = apresentar_menu(); 	
@@ -333,6 +334,17 @@ void excluir_contato(T_agenda *agenda_telefonica) {
 }
 
 /*
+ * Exibe a quantidade de contatos cadastrados e a quantidade de espaço disponível
+ */
+void exibir_informacoes_agenda(T_agenda *agenda_telefonica) {
+	printf("--------------------------------------\n");
+	printf("Total de Contatos Inseridos: %d\n", agenda_telefonica->tamanho);
+	printf("Total de Posições Restantes: %d\n", MAX - agenda_telefonica->tamanho);
+	printf("--------------------------------------\n");
+	travatela();
+}
+
+/*
  * Função principal do programa.
  */
 int main(int argc, char **argv) {
@@ -376,6 +388,12 @@ int main(int argc, char **argv) {
 			case('E'):
 				printf("Exibir todos os contatos que começam com uma letra.\n\n");
 				buscar_contatos_por_letra(&agenda_telefonica);
+				break;
+			
+			case('i'):
+			case('I'):
+				printf("Tela com informações sobre a agenda.\n\n");
+				exibir_informacoes_agenda(&agenda_telefonica);
 				break;
 			
 			case('s'):
