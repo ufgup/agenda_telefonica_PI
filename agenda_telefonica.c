@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sistema.h"
+#include "struct.h"
 
 /*
  * Apresenta o Menu de opções disponíveis no Sistema e trata opções inválidas
